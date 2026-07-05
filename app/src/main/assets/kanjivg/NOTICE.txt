@@ -1,0 +1,15 @@
+Kanji stroke-order data in this directory (strokes.json) is derived from the
+KanjiVG project by Ulrich Apel.
+
+  KanjiVG — https://kanjivg.tagaini.net
+  Copyright (C) 2009-2011 Ulrich Apel and contributors.
+
+Licensed under the Creative Commons Attribution-Share Alike 3.0 licence:
+  https://creativecommons.org/licenses/by-sa/3.0/
+
+strokes.json is a derivative work (the ordered stroke path data extracted from
+the per-kanji SVG files) and is therefore distributed under the same
+CC BY-SA 3.0 licence. This licence applies to the data only, not to the
+application source code.
+
+Regenerate with: python3 tools/build_kanjivg.py
