@@ -35,7 +35,7 @@ L'interface est en français ; le sūtra reste toujours trilingue.
 - 🧠 **Répétition espacée** (SM-2 allégé) avec quatre notes : *Encore / Difficile / Correct / Facile*.
 - 📖 **Texte intégral** parcourable, avec repère des fiches à réviser.
 - ✍️ **Tracé animé des kanji** (ordre des traits), via les données [KanjiVG](https://kanjivg.tagaini.net).
-- 🎨 Design « encre sumi sur papier washi, sceau vermillon », thèmes clair et sombre.
+- 🎨 Design « encre sumi sur papier washi, sceau vermillon », avec sélecteur de thème **Système / Clair / Sombre**.
 - 📴 100 % hors-ligne — aucune donnée réseau, cohérent avec une pratique de méditation.
 
 ## Stack technique

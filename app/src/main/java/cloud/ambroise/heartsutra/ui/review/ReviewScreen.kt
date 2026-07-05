@@ -16,14 +16,19 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.MenuBook
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.outlined.Brightness6
 import androidx.compose.material.icons.outlined.Gesture
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.HorizontalDivider
@@ -36,6 +41,10 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -45,6 +54,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import cloud.ambroise.heartsutra.data.Segment
 import cloud.ambroise.heartsutra.data.SutraData
+import cloud.ambroise.heartsutra.data.settings.ThemeMode
 import cloud.ambroise.heartsutra.data.srs.Grade
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -52,6 +62,8 @@ import cloud.ambroise.heartsutra.data.srs.Grade
 fun ReviewScreen(
     uiState: ReviewUiState,
     actions: ReviewActions,
+    themeMode: ThemeMode,
+    onSetTheme: (ThemeMode) -> Unit,
     onOpenFullText: () -> Unit,
     onShowStrokes: (Segment) -> Unit,
 ) {
@@ -67,6 +79,7 @@ fun ReviewScreen(
                     }
                 },
                 actions = {
+                    ThemeMenu(current = themeMode, onSelect = onSetTheme)
                     IconButton(onClick = onOpenFullText) {
                         Icon(Icons.AutoMirrored.Filled.MenuBook, contentDescription = "Texte complet")
                     }
@@ -88,6 +101,40 @@ fun ReviewScreen(
                 uiState.loading -> LoadingState()
                 uiState.sessionComplete -> SessionCompleteState(uiState, actions)
                 uiState.currentIndex != null -> CardState(uiState, actions, onShowStrokes)
+            }
+        }
+    }
+}
+
+@Composable
+private fun ThemeMenu(current: ThemeMode, onSelect: (ThemeMode) -> Unit) {
+    var expanded by remember { mutableStateOf(false) }
+    val label = { mode: ThemeMode ->
+        when (mode) {
+            ThemeMode.SYSTEM -> "Système"
+            ThemeMode.LIGHT -> "Clair"
+            ThemeMode.DARK -> "Sombre"
+        }
+    }
+    Box {
+        IconButton(onClick = { expanded = true }) {
+            Icon(Icons.Outlined.Brightness6, contentDescription = "Thème")
+        }
+        DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
+            ThemeMode.entries.forEach { mode ->
+                DropdownMenuItem(
+                    text = { Text(label(mode)) },
+                    onClick = {
+                        onSelect(mode)
+                        expanded = false
+                    },
+                    trailingIcon = {
+                        if (mode == current) {
+                            Icon(Icons.Filled.Check, contentDescription = null,
+                                tint = MaterialTheme.colorScheme.primary)
+                        }
+                    },
+                )
             }
         }
     }
