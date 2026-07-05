@@ -64,6 +64,8 @@ python3 tools/build_kanjivg.py   # télécharge les ~118 kanji du sūtra depuis 
 
 ## Crédits et licences
 
+- **Code de l'application** : © 2026 Christophe Ambroise, sous licence
+  **[GNU General Public License v3.0](LICENSE)** (GPL-3.0-or-later).
 - **Tracés des kanji** : données dérivées du projet **[KanjiVG](https://kanjivg.tagaini.net)**
   de Ulrich Apel, sous licence **[Creative Commons BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/)**.
   Le fichier `app/src/main/assets/kanjivg/strokes.json` est une œuvre dérivée et reste
