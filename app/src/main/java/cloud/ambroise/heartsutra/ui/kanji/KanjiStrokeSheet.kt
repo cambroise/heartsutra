@@ -30,8 +30,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import cloud.ambroise.heartsutra.R
 import cloud.ambroise.heartsutra.data.Segment
 import cloud.ambroise.heartsutra.data.kanji.KanjiStrokeRepository
 
@@ -131,7 +133,7 @@ private fun KanjiCell(char: Char, strokes: List<String>?) {
         }
         if (strokes == null) {
             Text(
-                text = "tracé indisponible",
+                text = stringResource(R.string.strokes_unavailable),
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(top = 4.dp),
@@ -144,7 +146,7 @@ private fun KanjiCell(char: Char, strokes: List<String>?) {
 private fun Attribution() {
     val uriHandler = LocalUriHandler.current
     Text(
-        text = "Tracés des kanji : KanjiVG · CC BY-SA 3.0 · kanjivg.tagaini.net",
+        text = stringResource(R.string.kanji_attribution),
         style = MaterialTheme.typography.labelMedium,
         color = MaterialTheme.colorScheme.onSurfaceVariant,
         textAlign = TextAlign.Center,

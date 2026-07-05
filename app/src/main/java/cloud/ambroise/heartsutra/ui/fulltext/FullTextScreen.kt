@@ -32,7 +32,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import cloud.ambroise.heartsutra.R
 import cloud.ambroise.heartsutra.data.Segment
 import cloud.ambroise.heartsutra.data.SutraData
 import cloud.ambroise.heartsutra.data.srs.CardSrs
@@ -51,10 +53,10 @@ fun FullTextScreen(
         containerColor = MaterialTheme.colorScheme.background,
         topBar = {
             TopAppBar(
-                title = { Text("Texte complet", style = MaterialTheme.typography.titleLarge) },
+                title = { Text(stringResource(R.string.full_text_title), style = MaterialTheme.typography.titleLarge) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Retour")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.back))
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -129,7 +131,7 @@ private fun SegmentRow(
             IconButton(onClick = onShowStrokes) {
                 Icon(
                     imageVector = Icons.Outlined.Gesture,
-                    contentDescription = "Tracé des kanji",
+                    contentDescription = stringResource(R.string.kanji_strokes),
                     tint = MaterialTheme.colorScheme.primary,
                 )
             }

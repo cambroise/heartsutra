@@ -1,3 +1,31 @@
 <resources>
-    <string name="app_name">Sūtra du Cœur</string>
+    <string name="app_name">Heart Sutra</string>
+    <string name="app_subtitle">Heart Sutra</string>
+
+    <!-- Review screen -->
+    <string name="action_full_text">Full text</string>
+    <string name="action_theme">Theme</string>
+    <string name="theme_system">System</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="reveal_hint">Recite from memory, then reveal</string>
+    <string name="show_answer">Show answer</string>
+    <string name="kanji_strokes">Stroke order</string>
+    <string name="grade_again">Again</string>
+    <string name="grade_hard">Hard</string>
+    <string name="grade_good">Good</string>
+    <string name="grade_easy">Easy</string>
+    <string name="session_complete">Session complete</string>
+    <string name="session_empty">Nothing to review right now</string>
+    <string name="session_summary">%1$d card(s) reviewed · %2$d due</string>
+    <string name="continue_due">Continue due cards</string>
+    <string name="review_all">Review the whole sutra</string>
+
+    <!-- Full-text screen -->
+    <string name="full_text_title">Full text</string>
+    <string name="back">Back</string>
+
+    <!-- Kanji stroke sheet -->
+    <string name="strokes_unavailable">strokes unavailable</string>
+    <string name="kanji_attribution">Kanji strokes: KanjiVG · CC BY-SA 3.0 · kanjivg.tagaini.net</string>
 </resources>

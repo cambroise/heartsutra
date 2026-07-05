@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Sūtra du Cœur</string>
+    <string name="app_subtitle">Sūtra du Cœur</string>
+
+    <!-- Écran de révision -->
+    <string name="action_full_text">Texte complet</string>
+    <string name="action_theme">Thème</string>
+    <string name="theme_system">Système</string>
+    <string name="theme_light">Clair</string>
+    <string name="theme_dark">Sombre</string>
+    <string name="reveal_hint">Récitez de mémoire, puis affichez</string>
+    <string name="show_answer">Afficher la réponse</string>
+    <string name="kanji_strokes">Tracé des kanji</string>
+    <string name="grade_again">Encore</string>
+    <string name="grade_hard">Difficile</string>
+    <string name="grade_good">Correct</string>
+    <string name="grade_easy">Facile</string>
+    <string name="session_complete">Session terminée</string>
+    <string name="session_empty">Rien à réviser pour l\'instant</string>
+    <string name="session_summary">%1$d fiche(s) revue(s) · %2$d à échéance</string>
+    <string name="continue_due">Continuer les fiches dues</string>
+    <string name="review_all">Réviser tout le sūtra</string>
+
+    <!-- Écran texte intégral -->
+    <string name="full_text_title">Texte complet</string>
+    <string name="back">Retour</string>
+
+    <!-- Feuille de tracé des kanji -->
+    <string name="strokes_unavailable">tracé indisponible</string>
+    <string name="kanji_attribution">Tracés des kanji : KanjiVG · CC BY-SA 3.0 · kanjivg.tagaini.net</string>
+</resources>

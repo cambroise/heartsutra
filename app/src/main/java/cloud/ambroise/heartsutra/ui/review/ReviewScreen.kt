@@ -50,8 +50,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import cloud.ambroise.heartsutra.R
 import cloud.ambroise.heartsutra.data.Segment
 import cloud.ambroise.heartsutra.data.SutraData
 import cloud.ambroise.heartsutra.data.settings.ThemeMode
@@ -74,14 +76,14 @@ fun ReviewScreen(
                 title = {
                     Column {
                         Text("般若心経", style = MaterialTheme.typography.titleLarge)
-                        Text("Sūtra du Cœur", style = MaterialTheme.typography.labelMedium,
+                        Text(stringResource(R.string.app_subtitle), style = MaterialTheme.typography.labelMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                 },
                 actions = {
                     ThemeMenu(current = themeMode, onSelect = onSetTheme)
                     IconButton(onClick = onOpenFullText) {
-                        Icon(Icons.AutoMirrored.Filled.MenuBook, contentDescription = "Texte complet")
+                        Icon(Icons.AutoMirrored.Filled.MenuBook, contentDescription = stringResource(R.string.action_full_text))
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -109,21 +111,19 @@ fun ReviewScreen(
 @Composable
 private fun ThemeMenu(current: ThemeMode, onSelect: (ThemeMode) -> Unit) {
     var expanded by remember { mutableStateOf(false) }
-    val label = { mode: ThemeMode ->
-        when (mode) {
-            ThemeMode.SYSTEM -> "Système"
-            ThemeMode.LIGHT -> "Clair"
-            ThemeMode.DARK -> "Sombre"
-        }
-    }
     Box {
         IconButton(onClick = { expanded = true }) {
-            Icon(Icons.Outlined.Brightness6, contentDescription = "Thème")
+            Icon(Icons.Outlined.Brightness6, contentDescription = stringResource(R.string.action_theme))
         }
         DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
             ThemeMode.entries.forEach { mode ->
+                val label = when (mode) {
+                    ThemeMode.SYSTEM -> R.string.theme_system
+                    ThemeMode.LIGHT -> R.string.theme_light
+                    ThemeMode.DARK -> R.string.theme_dark
+                }
                 DropdownMenuItem(
-                    text = { Text(label(mode)) },
+                    text = { Text(stringResource(label)) },
                     onClick = {
                         onSelect(mode)
                         expanded = false
@@ -239,7 +239,7 @@ private fun CenterCard(segment: Segment, revealed: Boolean, onShowStrokes: (Segm
                     modifier = Modifier.size(18.dp),
                 )
                 Spacer(Modifier.size(6.dp))
-                Text("Tracé des kanji", style = MaterialTheme.typography.labelMedium)
+                Text(stringResource(R.string.kanji_strokes), style = MaterialTheme.typography.labelMedium)
             }
             AnimatedVisibility(
                 visible = revealed,
@@ -271,7 +271,7 @@ private fun CenterCard(segment: Segment, revealed: Boolean, onShowStrokes: (Segm
             if (!revealed) {
                 Spacer(Modifier.height(16.dp))
                 Text(
-                    text = "Récitez de mémoire, puis affichez",
+                    text = stringResource(R.string.reveal_hint),
                     style = MaterialTheme.typography.labelMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     textAlign = TextAlign.Center,
@@ -315,20 +315,20 @@ private fun GradeControls(revealed: Boolean, actions: ReviewActions) {
                     contentColor = MaterialTheme.colorScheme.onPrimary,
                 ),
             ) {
-                Text("Afficher la réponse")
+                Text(stringResource(R.string.show_answer))
             }
         } else {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
             ) {
-                GradeButton("Encore", MaterialTheme.colorScheme.errorContainer,
+                GradeButton(stringResource(R.string.grade_again), MaterialTheme.colorScheme.errorContainer,
                     MaterialTheme.colorScheme.onErrorContainer, Modifier.weight(1f)) { actions.onGrade(Grade.AGAIN) }
-                GradeButton("Difficile", MaterialTheme.colorScheme.surfaceContainerHigh,
+                GradeButton(stringResource(R.string.grade_hard), MaterialTheme.colorScheme.surfaceContainerHigh,
                     MaterialTheme.colorScheme.onSurface, Modifier.weight(1f)) { actions.onGrade(Grade.HARD) }
-                GradeButton("Correct", MaterialTheme.colorScheme.secondaryContainer,
+                GradeButton(stringResource(R.string.grade_good), MaterialTheme.colorScheme.secondaryContainer,
                     MaterialTheme.colorScheme.onSecondaryContainer, Modifier.weight(1f)) { actions.onGrade(Grade.GOOD) }
-                GradeButton("Facile", MaterialTheme.colorScheme.primary,
+                GradeButton(stringResource(R.string.grade_easy), MaterialTheme.colorScheme.primary,
                     MaterialTheme.colorScheme.onPrimary, Modifier.weight(1f)) { actions.onGrade(Grade.EASY) }
             }
         }
@@ -365,14 +365,14 @@ private fun SessionCompleteState(uiState: ReviewUiState, actions: ReviewActions)
         Text("🙏", style = MaterialTheme.typography.displayMedium)
         Spacer(Modifier.height(16.dp))
         Text(
-            text = if (uiState.reviewedThisSession > 0) "Session terminée" else "Rien à réviser pour l'instant",
+            text = stringResource(if (uiState.reviewedThisSession > 0) R.string.session_complete else R.string.session_empty),
             style = MaterialTheme.typography.titleLarge,
             color = MaterialTheme.colorScheme.onBackground,
             textAlign = TextAlign.Center,
         )
         Spacer(Modifier.height(8.dp))
         Text(
-            text = "${uiState.reviewedThisSession} fiche(s) revue(s) · ${uiState.dueCount} à échéance",
+            text = stringResource(R.string.session_summary, uiState.reviewedThisSession, uiState.dueCount),
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Center,
@@ -385,11 +385,11 @@ private fun SessionCompleteState(uiState: ReviewUiState, actions: ReviewActions)
                     containerColor = MaterialTheme.colorScheme.primary,
                     contentColor = MaterialTheme.colorScheme.onPrimary,
                 ),
-            ) { Text("Continuer les fiches dues") }
+            ) { Text(stringResource(R.string.continue_due)) }
             Spacer(Modifier.height(12.dp))
         }
         FilledTonalButton(onClick = { actions.onStartSession(SessionKind.ALL) }) {
-            Text("Réviser tout le sūtra")
+            Text(stringResource(R.string.review_all))
         }
     }
 }
